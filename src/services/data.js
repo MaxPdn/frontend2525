@@ -2,12 +2,15 @@ import { computed, ref, watch } from "vue"
 
 // --------- Données Utilisateurs ----------------------------------
 const storedUsers = JSON.parse(localStorage.getItem('users'))
+
 export const users = ref( storedUsers ||[
     { id: 1, username: 'John', age: 55, telephone: "0152458522", email: "johnDoe@gmail.com", firstname: 'Doe', role: 'admin', password: '1234' },
     { id: 2, username: 'Rogalex', age: 35, telephone: "0154458522", email: "zannourogalex@gmail.com", firstname: 'ZANNOU', role: 'doctor', password: '1234' },
     { id: 3, username: 'Marcel', age: 25, telephone: "0152488522", email: "yessia@gmail.com", firstname: 'YESSIA', role: 'recept', password: '1234' },
 ])
+
 localStorage.setItem('users', JSON.stringify(users.value))
+
 watch(
     users,
     (newValue) => {
@@ -73,7 +76,7 @@ export const patients = ref(storedPatients || [
         createdAt: new Date()
     }
 ])
-// localStorage.setItem('patients', JSON.stringify(patients.value))
+localStorage.setItem('patients', JSON.stringify(patients.value))
 watch(
     patients,
     (newValue) => {
@@ -105,6 +108,7 @@ export const rooms = ref([
     { roomId: 19, numero: "019", capacite: 5, statut: "available", affectationPatient: [] },
     { roomId: 20, numero: "020", capacite: 5, statut: "available", affectationPatient: [] }
 ])
+localStorage.setItem("rooms", JSON.stringify(rooms.value));
 watch(
     rooms,
     (newVal) => {

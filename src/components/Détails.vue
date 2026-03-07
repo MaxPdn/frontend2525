@@ -130,7 +130,7 @@ const editPatient = () => {
                 </svg></div>
               <div class="track-content">
                 <label>Médecin Responsable</label>
-                <span>Dr. {{ doctors.find(d=> d.id = patient.doctorId).name || "En attente d'assignation" }}</span>
+                <span>Dr. {{ doctors.find(d=> d.id = patient.doctorId)?.name || "En attente d'assignation" }}</span>
               </div>
             </div>
           </div>
