@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-const id = currentId.value.id
+const id = currentId.value?.id
 watch(
     currentId,
     (newValue) => {
@@ -15,7 +15,7 @@ watch(
     { deep: true }
 )
 const currentUser = computed(() => {
-  return users.value.find(u => u.id === id) || null;
+  return users.value?.find(u => u.id === id) || null;
 })
 
 function logoutt() {

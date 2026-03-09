@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { users } from '@/services/data';
 import { useRouter } from 'vue-router';
+import { fetchData } from '@/services/api.js';
 
 const router = useRouter();
 
@@ -14,27 +15,38 @@ const number = ref("");
 const role = ref("admin");
 const password = ref('')
 const showToast = ref(false);
-
 const rolesDisponibles = ref([
   { id: "admin", label: "Administrateur", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" },
   { id: "recept", label: "Réceptionniste", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" },
   { id: "Doctor", label: "Médecin / Expert", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" }
 ]);
+const url = 'http://localhost:3000/users';
+const m = "POST";
+const body = {
+  username: prenom.value,
+  firstname: nom.value,
+  role: role.value,
+  password: password.value,
+  telephone: number.value,
+  email: email.value,
+  age: age.value,
+}
 
 function addUsers() {
   if (!nom.value || !prenom.value || !email.value) return;
 
-  users.value.push({
-    id: Date.now(),
-    username: prenom.value,
-    firstname: nom.value,
-    role: role.value,
-    password: password.value,
-    telephone: number.value,
-    email: email.value,
-    age: age.value,
-  });
+  // users.value.push({
+  //   id: Date.now(),
+  //   username: prenom.value,
+  //   firstname: nom.value,
+  //   role: role.value,
+  //   password: password.value,
+  //   telephone: number.value,
+  //   email: email.value,
+  //   age: age.value,
+  // });
 
+  onMounted(fetchData(url, m, body))
   // Reset
   nom.value = prenom.value = age.value = email.value = number.value = "";
   role.value = "admin";
