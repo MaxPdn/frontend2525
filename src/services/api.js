@@ -1,9 +1,9 @@
 export const fetchData = async (url, method = "GET", body = null) => {
   try {
     const options = {
-      method,
+      method: method,
       headers: {
-        "Contentr-Type": "application/json",
+        "Content-Type": "application/json",
       },
     };
 

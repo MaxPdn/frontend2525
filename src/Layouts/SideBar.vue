@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from 'vue';
-import { currentId } from '@/services/auth';
-import { users } from '@/services/data';
+import { computed } from "vue";
+import { currentId } from "@/services/auth";
+import { users } from "@/services/data";
 
 const currentUser = computed(() => {
-  return users.value.find(u => u.id === currentId.value.id) || null;
-})
+  return users.value.find((u) => u.id === currentId.value.id) || null;
+});
 </script>
 
 <template>
@@ -19,22 +19,62 @@ const currentUser = computed(() => {
 
     <div class="sidebar-section">
       <small class="section-title">Menu Principal</small>
-      <RouterLink to='/admindash' class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <RouterLink to="/admindash" class="nav-item">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
         <span>Tableau de bord</span>
       </RouterLink>
     </div>
 
     <div class="sidebar-section">
       <small class="section-title">Gestion Patients</small>
-      
-      <RouterLink to='/patients' class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+
+      <RouterLink to="/patients" class="nav-item">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
         <span>Registre Patients</span>
       </RouterLink>
 
-      <RouterLink to='/rdv' class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <RouterLink to="/rdv" class="nav-item">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
         <span>Rendez-vous</span>
       </RouterLink>
     </div>
@@ -42,21 +82,69 @@ const currentUser = computed(() => {
     <div class="sidebar-section">
       <small class="section-title">Infrastructure</small>
 
-      <RouterLink to='/doctors' class="nav-item" v-if="currentUser.role === 'admin'">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
+      <RouterLink
+        to="/doctors"
+        class="nav-item"
+        v-if="currentUser?.role === 'admin'"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m12 14 4-4"></path>
+          <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+        </svg>
         <span>Corps Médical</span>
       </RouterLink>
 
-      <RouterLink to='/rooms' class="nav-item" v-if="currentUser.role === 'admin'|| currentUser.role === 'recept'">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v11"></path><path d="M2 17h20"></path><path d="M6 17v4"></path><path d="M18 17v4"></path></svg>
+      <RouterLink
+        to="/rooms"
+        class="nav-item"
+        v-if="currentUser?.role === 'admin' || currentUser?.role === 'recept'"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M2 20V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v11"></path>
+          <path d="M2 17h20"></path>
+          <path d="M6 17v4"></path>
+          <path d="M18 17v4"></path>
+        </svg>
         <span>Gestion Chambres</span>
       </RouterLink>
     </div>
 
-    <div class="sidebar-section admin-zone" v-if="currentUser.role === 'admin'">
+    <div class="sidebar-section admin-zone" v-if="currentUser?.role === 'admin'">
       <small class="section-title">Administration</small>
-      <RouterLink to='/users' class="nav-item special-link">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+      <RouterLink to="/users" class="nav-item special-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <line x1="19" y1="8" x2="19" y2="14"></line>
+          <line x1="22" y1="11" x2="16" y2="11"></line>
+        </svg>
         <span>Nouveau Personnel</span>
       </RouterLink>
     </div>
@@ -205,10 +293,13 @@ const currentUser = computed(() => {
     align-items: center;
   }
 
-  .section-title, .status-text, .sidebar-footer, .nav-item span {
+  .section-title,
+  .status-text,
+  .sidebar-footer,
+  .nav-item span {
     display: none;
   }
-  
+
   .status-indicator {
     padding: 8px;
   }
@@ -219,11 +310,11 @@ const currentUser = computed(() => {
     height: 54px;
     padding: 0;
   }
-  
+
   .nav-item:hover .icon {
     transform: scale(1.1);
   }
-  
+
   .router-link-active {
     box-shadow: none;
     border: 2px solid #0d9488;

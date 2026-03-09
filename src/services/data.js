@@ -3,9 +3,46 @@ import { fetchData } from "./api";
 
 // --------- Données Utilisateurs ----------------------------------
 
-export const users = ref(
-  (await fetchData("http://localhost:3000/api/users")) || [],
-);
+export const users = ref([]);
+
+const loadUsers = async () => {
+  const data = await fetchData("http://localhost:3000/api/users");
+  users.value = data || [
+    {
+      id: 1,
+      username: "John",
+      age: 55,
+      telephone: "0152458522",
+      email: "johnDoe@gmail.com",
+      firstname: "Doe",
+      role: "admin",
+      password: "1234",
+    },
+    {
+      id: 2,
+      username: "Rogalex",
+      age: 35,
+      telephone: "0154458522",
+      email: "zannourogalex@gmail.com",
+      firstname: "ZANNOU",
+      role: "doctor",
+      password: "1234",
+    },
+    {
+      id: 3,
+      username: "Marcel",
+      age: 25,
+      telephone: "0152488522",
+      email: "yessia@gmail.com",
+      firstname: "YESSIA",
+      role: "recept",
+      password: "1234",
+    },
+  ];
+  console.log(users.value);
+};
+
+loadUsers();
 // const storedUsers = JSON.parse(localStorage.getItem('users'))
 
 // export const users = ref( storedUsers ||[
