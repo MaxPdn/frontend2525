@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { users } from '@/services/data';
 import { useRouter } from 'vue-router';
 import { fetchData } from '@/services/api.js';
 
@@ -21,22 +20,26 @@ const rolesDisponibles = ref([
   { id: "Doctor", label: "Médecin / Expert", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" }
 ]);
 
-const url = 'http://localhost:3000/users';
-const m = "POST";
-const body = {
-  username: prenom.value,
-  firstname: nom.value,
-  role: role.value,
-  password: password.value,
-  telephone: number.value,
-  email: email.value,
-  age: age.value,
-}
 
-function addUsers() {
+
+async function addUsers() {
   if (!nom.value || !prenom.value || !email.value) return;
 
-  onMounted(fetchData(url, m, body))
+  const url = 'http://localhost:3000/api/users';
+  const m = "POST";
+  const body = {
+    username: prenom.value,
+    firstname: nom.value,
+    role: role.value,
+    password: password.value,
+    telephone: number.value,
+    email: email.value,
+    age: age.value,
+  }
+
+  const data = await fetchData(url, m, body);
+  console.log(data);
+  
 
   // Reset
   nom.value = prenom.value = age.value = email.value = number.value = "";

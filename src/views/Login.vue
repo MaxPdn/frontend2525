@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { users } from "@/services/data";
+// import { users } from "@/services/data";
 import { login } from "@/services/auth";
 
 const router = useRouter();
@@ -17,15 +17,19 @@ async function verify() {
   }
 
   const success = await login(username.value, mdp.value);
+
+  console.log(success);
+
   if (!success) {
     showError("Identifiants incorrects");
     return;
   }
-  const currUser = users.value.find(
-    (u) => u.username.toLowerCase() === username.value.toLowerCase(),
-  );
+  // const currUser = users.value.find(
+  //   (u) => u.username.toLowerCase() === username.value.toLowerCase(),
+  // );
+  const currUser = success
   console.log(currUser);
-  
+
   if (!currUser) {
     showError("Utilisateur introuvable");
     return;
@@ -36,6 +40,9 @@ async function verify() {
     doctor: "/doctordash",
     recept: "/receptdash",
   };
+  console.log(currUser.role);
+  console.log(routes[currUser.role]);
+
   router.push(routes[currUser.role] || "/");
 }
 
@@ -46,9 +53,9 @@ function showError(message, duration = 3000) {
   }, duration);
 }
 
-watch(users, (newValue) => {
-  console.log("Users changé:", newValue);
-});
+// watch(users, (newValue) => {
+//   console.log("Users changé:", newValue);
+// });
 </script>
 
 <template>
@@ -68,22 +75,12 @@ watch(users, (newValue) => {
       <div class="form-body">
         <div class="input-field">
           <label>Identifiant</label>
-          <input
-            type="text"
-            v-model="username"
-            placeholder="Entrez votre ID"
-            autocomplete="username"
-          />
+          <input type="text" v-model="username" placeholder="Entrez votre ID" autocomplete="username" />
         </div>
 
         <div class="input-field">
           <label>Mot de passe</label>
-          <input
-            type="password"
-            v-model="mdp"
-            placeholder="••••••••"
-            autocomplete="current-password"
-          />
+          <input type="password" v-model="mdp" placeholder="••••••••" autocomplete="current-password" />
         </div>
 
         <Transition name="slide-up">

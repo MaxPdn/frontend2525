@@ -12,6 +12,8 @@ export const fetchData = async (url, method = "GET", body = null) => {
     }
 
     const res = await fetch(url, options);
+    console.log(res);
+    
 
     if (!res.ok) {
       throw new Error("Erreur serveur");

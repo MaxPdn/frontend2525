@@ -27,7 +27,7 @@ export async function login(username, password) {
     localStorage.setItem("userId", existance.id);
     currentId.value = { id: existance.id };
     auThis.value = true;
-    return true;
+    return existance;
   }
 }
 
